@@ -10,7 +10,6 @@ typedef struct Sabor {
 } Sabor;
 
 Sabor construtor_sabor(int cod, char nome[], int tipo){
-
     Sabor novo;
 
     novo.cod = cod;
@@ -27,7 +26,7 @@ typedef struct ListaSabores {
 
 } ListaSabores;
 
-ListaSabores *  construtos_lista_sabores(){
+ListaSabores *  construtor_lista_sabores(){
     ListaSabores * novo = (ListaSabores*)malloc(sizeof(ListaSabores));
     novo->tamanho = 0;
     novo->capacidade = 0;
