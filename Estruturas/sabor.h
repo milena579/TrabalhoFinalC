@@ -1,11 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "tipo.h";
+#include "tipo.h"
+
+#ifndef sabor
+#define sabor
 
 typedef struct Sabor {
     int cod;
     char nome[50];
-    int tipo  //tipo de sabor: tradicional, especial, nobre
+    int tipo;  //tipo de sabor: tradicional, especial, nobre
 
 } Sabor;
 
@@ -14,7 +15,7 @@ Sabor construtor_sabor(int cod, char nome[], int tipo){
 
     novo.cod = cod;
     strcpy(novo.nome, nome); //Quando se quiser copiar o conteúdo de uma string para outro se deve utilizar a função strcpy
-    strcpy(novo.tipo);
+    novo.tipo = tipo; 
 
     return novo;
 }
@@ -26,7 +27,8 @@ typedef struct ListaSabores {
 
 } ListaSabores;
 
-ListaSabores *  construtor_lista_sabores(){
+ListaSabores *construtor_lista_sabores(){
+
     ListaSabores * novo = (ListaSabores*)malloc(sizeof(ListaSabores));
     novo->tamanho = 0;
     novo->capacidade = 0;
@@ -38,7 +40,7 @@ ListaSabores *  construtor_lista_sabores(){
 void add_sabor(ListaSabores * array, int cod, char nome[], int tipo){
     Sabor novo_sabor = construtor_sabor(cod, nome, tipo);
 
-    if( array->array == NULL){
+    if(array->array == NULL){
         array->capacidade = 2;
         array->array = (Sabor*)malloc(array->capacidade*sizeof(Sabor));
     }
@@ -51,11 +53,19 @@ void add_sabor(ListaSabores * array, int cod, char nome[], int tipo){
     array->array[array->tamanho++] = novo_sabor;
 }
 
-Sabor * get_sabor( ListaSabores * array, int index) {
-
-    if(index >= array->tamanho || index < 0){
-        return NULL;
+Sabor *get_sabor(ListaSabores *array, int index) {
+    if (index >= array->tamanho || index < 0) {
+        return NULL; // Verifica se o índice está fora do intervalo
     }
-
-    return &array->array[index];
+    return &array->array[index]; // Retorna o ponteiro para o sabor no índice fornecido
 }
+
+
+void liberar_lista_sabores(ListaSabores *array) {
+    if (array != NULL) {
+        free(array->array);
+        free(array);
+    }
+}
+
+#endif

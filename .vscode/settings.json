@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "sabor.h": "c",
+        "tipo.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
