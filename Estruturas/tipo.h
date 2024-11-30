@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+
+#ifndef TIPO_H
+#define TIPO_H
 
 typedef struct Tipo {
     int id;
@@ -26,7 +27,7 @@ typedef struct ListaTipo {
 
 } ListaTipo;
 
-ListaTipo *  contrutor_lista_tipo(){
+ListaTipo *construtor_lista_tipo(){
     ListaTipo * novo = (ListaTipo*)malloc(sizeof(ListaTipo));
     novo->tamanho = 0;
     novo->capacidade = 0;
@@ -52,7 +53,7 @@ void add_tipo(ListaTipo * array, int id, char nome[], float valor){
     array->array[array->tamanho++] = novo_tipo;
 }
 
-Tipo * get_tipo( ListaTipo * array, int index) {
+Tipo *get_tipo( ListaTipo * array, int index) {
 
     if(index >= array->tamanho || index < 0){
         return NULL;
@@ -60,3 +61,11 @@ Tipo * get_tipo( ListaTipo * array, int index) {
 
     return &array->array[index];
 }
+
+void liberar_lista_tipos(ListaTipo *lista) {
+    if (!lista) return;
+    if (lista->array) free(lista->array);
+    free(lista);
+}
+
+#endif
