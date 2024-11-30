@@ -31,11 +31,12 @@ int main() {
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
 
-        Sabor *sabor = get_sabor(lista_sabores, i);
-        printf("Código: %d, Nome: %s, Tipo: %s (%.2f)\n", sabor->cod, sabor->nome, sabor->tipo);
+        Sabor *sabores = get_sabor(lista_sabores, i);
+
+    
+        printf("Código: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);
         
     }
-
     // Liberar memória
     liberar_lista_tipos(lista_tipos);
     liberar_lista_sabores(lista_sabores);
