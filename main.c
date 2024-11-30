@@ -32,8 +32,6 @@ int main() {
     for (int i = 0; i < lista_sabores->tamanho; i++) {
 
         Sabor *sabor = get_sabor(lista_sabores, i);
-
-    
         printf("Código: %d, Nome: %s, Tipo: %s (%.2f)\n", sabor->cod, sabor->nome, sabor->tipo);
         
     }

@@ -32,7 +32,7 @@ void registrarPedido() {
 
     int cod;
     char nomeCliente[20];
-    ListaPizza pizzas; 
+    ListaPizza pizzas;
     int quantidadePizzas;
     float total;
 
