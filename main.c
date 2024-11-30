@@ -16,7 +16,10 @@ int main() {
 
     // Listando os tipos disponíveis
     printf("\n--- Lista de Tipos ---\n");
-    for (int i = 0; i < lista_tipos->tamanho; i++) {
+
+    int i;
+
+    for ( i = 0; i < lista_tipos->tamanho; i++) {
         Tipo *tipo = get_tipo(lista_tipos, i);
         printf("ID: %d, Nome: %s, Valor: %.2f\n", tipo->id, tipo->nome, tipo->valor);
     }
@@ -29,11 +32,9 @@ int main() {
     // Listando os sabores disponíveis
     printf("\n--- Lista de Sabores ---\n");
     
-    for (int i = 0; i < lista_sabores->tamanho; i++) {
+    for (i = 0; i < lista_sabores->tamanho; i++) {
 
         Sabor *sabores = get_sabor(lista_sabores, i);
-
-    
         printf("Código: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);
         
     }

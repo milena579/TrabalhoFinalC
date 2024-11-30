@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 
 #ifndef TIPO_H
 #define TIPO_H
