@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "Funcoes/pizza_funcao.h"
 #include "pizza.h"
-#include "Funções/pizza_funcao.h"
 
 #ifndef pedido
 #define pedido

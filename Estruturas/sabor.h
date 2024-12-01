@@ -59,11 +59,6 @@ void add_sabor(ListaSabores *lista, int cod, const char nome[], const char tipo[
     if (lista->tamanho == lista->capacidade) {
         lista->capacidade *= 2;
         Sabor *novo_array = (Sabor *)realloc(lista->array, lista->capacidade * sizeof(Sabor));
-        if (novo_array == NULL) {
-            perror("Falha ao redimensionar array de sabores");
-            liberar_lista_sabores(lista);
-            exit(EXIT_FAILURE);
-        }
         lista->array = novo_array;
     }
 
