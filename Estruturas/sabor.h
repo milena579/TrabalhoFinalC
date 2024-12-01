@@ -12,7 +12,6 @@ typedef struct Sabor {
     float preco; 
 } Sabor;
 
-// Construtor de Sabor
 Sabor construtor_sabor(int cod, const char nome[], const char tipo[], float preco) {
     Sabor novo;
 
@@ -24,7 +23,6 @@ Sabor construtor_sabor(int cod, const char nome[], const char tipo[], float prec
     return novo;
 }
 
-// Estrutura para representar a lista de sabores
 typedef struct ListaSabores {
     Sabor *array;
     int tamanho;   
@@ -55,25 +53,21 @@ ListaSabores *construtor_lista_sabores() {
 void add_sabor(ListaSabores *lista, int cod, const char nome[], const char tipo[], float preco) {
     if (lista == NULL) return;
 
-    // Expande a capacidade do array se necessário
     if (lista->tamanho == lista->capacidade) {
         lista->capacidade *= 2;
         Sabor *novo_array = (Sabor *)realloc(lista->array, lista->capacidade * sizeof(Sabor));
         lista->array = novo_array;
     }
 
-    // Cria e adiciona o novo sabor
     lista->array[lista->tamanho++] = construtor_sabor(cod, nome, tipo, preco);
 }
 
-// Retorna um ponteiro para o sabor no índice especificado
 Sabor *get_sabor(const ListaSabores *lista, int index) {
     if (lista == NULL || index < 0 || index >= lista->tamanho) {
         return NULL;
     }
     return &lista->array[index];
 }
-
 
 void liberar_lista_sabores(ListaSabores *lista) {
     if (lista != NULL) {

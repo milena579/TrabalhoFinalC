@@ -29,6 +29,7 @@ Pizza construtor_pizza(int id, char nome[], char tamanho[], char id_sabor[], flo
     strcpy(novaPizza.nome, nome); //Quando se quiser copiar o conteúdo de uma string para outro se deve utilizar a função strcpy
     strcpy(novaPizza.tamanho, tamanho);
     strcpy(novaPizza.id_sabor, id_sabor);
+
     novaPizza.valor = valor;
 
     return novaPizza;
