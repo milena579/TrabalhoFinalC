@@ -40,8 +40,13 @@ int main() {
         
     }
 
-    ListaPizza *lista_pizzas = construtor_lista_pizza();
-    add_pizza(lista_pizzas, 1, "Mussarela, FrangoCatupiry", "M", )
+    // ListaPizza *lista_pizzas = construtor_lista_pizza();
+    // add_pizza(lista_pizzas, lista_sabores, lista_tipos, 1, "Mussarela, FrangoCatupiry", "M", 2, 0);
+
+
+    Pedido * newPedido;
+    registrarPedido(lista_sabores, lista_tipos);
+
     // Liberar memória
     liberar_lista_tipos(lista_tipos);
     liberar_lista_sabores(lista_sabores);

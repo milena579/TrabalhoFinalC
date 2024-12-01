@@ -1,13 +1,4 @@
 {
-<<<<<<<<< Temporary merge branch 1
-<<<<<<< HEAD
-=========
-  "files.associations": {
-    "sabor.h": "c",
-    "tipo.h": "c"
-  },
-  "C_Cpp.errorSquiggles": "disabled",
->>>>>>>>> Temporary merge branch 2
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -65,14 +56,4 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false
-<<<<<<<<< Temporary merge branch 1
-=======
-    "files.associations": {
-        "sabor.h": "c",
-        "tipo.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
->>>>>>> main
-=========
->>>>>>>>> Temporary merge branch 2
 }

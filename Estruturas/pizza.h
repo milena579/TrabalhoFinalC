@@ -22,7 +22,7 @@ typedef struct ListaPizza {
 } ListaPizza;
 
 //função que será chamada na main para declarar uma pizza
-Pizza construtor_pizza(int id, char nome[], char tamanho[], int id_sabor[3], float valor)
+Pizza construtor_pizza(ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3], float valor)
 {
     Pizza novaPizza;
 
@@ -32,12 +32,9 @@ Pizza construtor_pizza(int id, char nome[], char tamanho[], int id_sabor[3], flo
     //Aqui pensei em pesquisar o id do sabor, depois o tipo do sabor e por fim, o valor daquele tipo
     // afim de adicionar ele ao valor da pizza
 
-    Sabor *sabores = get_sabor(ListaSabores, id_sabor[0])
-    int tipo = sabores->tipo;
-
-    Tipo *tipoSabor = get_tipo(ListaTipo, tipo);
-
-    float valorTipo = tipoSabor->valor;
+    Sabor * findSabor = get_sabor(lista_sabores, id_sabor[0]);
+    Tipo * findTipo = get_tipo(lista_tipos, findSabor->tipo);
+    float valorTipo = findTipo->valor;
 
     if(tamanho == "P" || tamanho == "p"){
         novaPizza.valor = valor + (valor * 0.10);
@@ -62,9 +59,9 @@ ListaPizza * construtor_lista_pizza() {
     return novo;
 }
 
-void add_pizza(ListaPizza * array, int id, char nome[], char tamanho[], char id_sabor[],  float valor){
+void add_pizza(ListaPizza * array, ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3],  float valor){
 
-    Pizza nova_pizza = construtor_pizza(id, nome, tamanho, id_sabor, valor);
+    Pizza nova_pizza = construtor_pizza(lista_sabores, lista_tipos, id, nome, tamanho, id_sabor[3], valor);
 
     if( array->array == NULL){
         array->capacidade = 2;

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "pizza.h"
-#include "Funções/pizza_funcao.h"
+#include "../Funcoes/pizza_funcao.h"
 
 #ifndef pedido
 #define pedido
@@ -28,7 +28,7 @@ Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza pizzas, int qua
 }
 
 // Função para registrar um pedido
-void registrarPedido() {
+void registrarPedido(ListaSabores * lista_sabores, ListaTipo * lista_tipos) {
 
     int cod;
     char nomeCliente[20];
@@ -37,16 +37,18 @@ void registrarPedido() {
     float total;
 
     ListaPizza * lista_pizzas = construtor_lista_pizza();
-    Pedido * pedidos;
+    Pedido pedidos = construtor_pedido(cod, nomeCliente, pizzas, quantidadePizzas, total);
     
     printf("\n--- Registrar Pedido ---\n");
-    printf("\nDigite o número de pizzas que serão adicionadas: ");
-    scanf("%d", &pedidos->quantidadePizzas);
+    printf("\nDigite o seu nome: ");
+    scanf("%s", &pedidos.nomeCliente);
+    printf("\nDigite o numero de pizzas que serão adicionadas: ");
+    scanf("%d", &pedidos.quantidadePizzas);
 
     // Registrar as pizzas
-    pedidos->total = 0;
-    for (int i = 0; i < pedidos->quantidadePizzas; i++) {
-        adicionar_pizza(&lista_pizzas, i+1);
+    pedidos.total = 0;
+    for (int i = 0; i < pedidos.quantidadePizzas; i++) {
+        adicionar_pizza(lista_pizzas, lista_sabores, lista_tipos, i+1);
     }
 }
 
