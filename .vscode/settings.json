@@ -1,22 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 22ddd8942fb8de49a936002e37e7528b507f2f8d
-  "files.associations": {
-    "sabor.h": "c",
-    "tipo.h": "c"
-  },
-  "C_Cpp.errorSquiggles": "disabled",
-<<<<<<< HEAD
->>>>>>> main
-=======
-=======
-<<<<<<< HEAD
->>>>>>> ingrid
->>>>>>> 22ddd8942fb8de49a936002e37e7528b507f2f8d
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
@@ -74,22 +56,4 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 22ddd8942fb8de49a936002e37e7528b507f2f8d
-=======
-    "files.associations": {
-        "sabor.h": "c",
-        "tipo.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
->>>>>>> main
-<<<<<<< HEAD
-=======
->>>>>>> main
-=======
->>>>>>> ingrid
->>>>>>> 22ddd8942fb8de49a936002e37e7528b507f2f8d
 }
