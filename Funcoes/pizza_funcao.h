@@ -3,7 +3,6 @@
 #include <string.h>
 #include "../Estruturas/pizza.h"
 #include "../Estruturas/sabor.h"
-#include "../Estruturas/tipo.h"
 
 #ifndef pizza_funcao
 #define pizza_funcao
@@ -39,9 +38,6 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, ListaTipo * tip
     int id_sabor[3];
     float valor = 0;
 
-    // char new_sabor_id[20] = get_sabor(array_sabores, id_sabor);
-    // char new_tipo_id[20] = get_tipo(array_tipos, id_tipo);
-    
     printf("\n ------------ ADICIONAR PIZZA ----------\n");
 
     printf("\nTamanho (P, M, G): ");
@@ -53,7 +49,11 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, ListaTipo * tip
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
+<<<<<<< HEAD
         printf("Codigo: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);   
+=======
+        printf("Código: %d, Nome: %s, Tipo: %i \n, Preço: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
+>>>>>>> origin/milena
     }
 
     //pensando em facilitar, pensei em deixar que a pizza P tem um sabor apenas, a M 2 e G 3

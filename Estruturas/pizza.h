@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sabor.h"
-#include "tipo.h"
 
 #ifndef pizza
 #define pizza
@@ -11,7 +10,7 @@ typedef struct Pizza {
     int id;
     char nome[50];
     char tamanho[15];
-    int id_sabor[3]; //pensei em deixar os id em um vetor de até 3 sabores
+    char id_sabor[20];
     float valor;
 } Pizza;
 
@@ -22,12 +21,17 @@ typedef struct ListaPizza {
 } ListaPizza;
 
 //função que será chamada na main para declarar uma pizza
+<<<<<<< HEAD
 Pizza construtor_pizza(ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3], float valor)
+=======
+Pizza construtor_pizza(int id, char nome[], char tamanho[], char id_sabor[], float valor)
+>>>>>>> origin/milena
 {
     Pizza novaPizza;
 
     novaPizza.id = id;
     strcpy(novaPizza.nome, nome); //Quando se quiser copiar o conteúdo de uma string para outro se deve utilizar a função strcpy
+<<<<<<< HEAD
     
     //Aqui pensei em pesquisar o id do sabor, depois o tipo do sabor e por fim, o valor daquele tipo
     // afim de adicionar ele ao valor da pizza
@@ -44,8 +48,11 @@ Pizza construtor_pizza(ListaSabores * lista_sabores, ListaTipo * lista_tipos, in
         novaPizza.valor = valor + (valor * 0.25);
     }
 
+=======
+>>>>>>> origin/milena
     strcpy(novaPizza.tamanho, tamanho);
     strcpy(novaPizza.id_sabor, id_sabor);
+    novaPizza.valor = valor;
 
     return novaPizza;
 }
@@ -59,9 +66,15 @@ ListaPizza * construtor_lista_pizza() {
     return novo;
 }
 
+<<<<<<< HEAD
 void add_pizza(ListaPizza * array, ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3],  float valor){
 
     Pizza nova_pizza = construtor_pizza(lista_sabores, lista_tipos, id, nome, tamanho, id_sabor[3], valor);
+=======
+void add_pizza(ListaPizza * array, int id, char nome[], char tamanho[], char id_sabor[], float valor){
+
+    Pizza nova_pizza = construtor_pizza(id, nome, tamanho, id_sabor,valor);
+>>>>>>> origin/milena
 
     if( array->array == NULL){
         array->capacidade = 2;

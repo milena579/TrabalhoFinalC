@@ -15,6 +15,12 @@ typedef struct Pedido {
     float total;
 } Pedido;
 
+typedef struct ListPedido {
+    Pedido * array;
+    int tamanho;
+    int capacidade;
+} ListaPedido;
+
 //função que será chamada na main para declarar um pedido
 Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza pizzas, int quantidadePizzas, float total)
 {
@@ -27,40 +33,31 @@ Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza pizzas, int qua
     novoPedido.total;
 }
 
-// Função para registrar um pedido
-void registrarPedido(ListaSabores * lista_sabores, ListaTipo * lista_tipos) {
+ListaPedido * construtor_lista_pedido() {
+    ListaPedido * novo = (ListaPedido*) malloc(sizeof(ListaPedido));
+    novo->tamanho = 0;
+    novo->capacidade = 0;
+    novo->array = NULL;
 
-    int cod;
-    char nomeCliente[20];
-    ListaPizza pizzas;
-    int quantidadePizzas;
-    float total;
-
-    ListaPizza * lista_pizzas = construtor_lista_pizza();
-    Pedido pedidos = construtor_pedido(cod, nomeCliente, pizzas, quantidadePizzas, total);
-    
-    printf("\n--- Registrar Pedido ---\n");
-    printf("\nDigite o seu nome: ");
-    scanf("%s", &pedidos.nomeCliente);
-    printf("\nDigite o numero de pizzas que serão adicionadas: ");
-    scanf("%d", &pedidos.quantidadePizzas);
-
-    // Registrar as pizzas
-    pedidos.total = 0;
-    for (int i = 0; i < pedidos.quantidadePizzas; i++) {
-        adicionar_pizza(lista_pizzas, lista_sabores, lista_tipos, i+1);
-    }
+    return novo;
 }
 
-// Função para exibir o pedido
-// void exibirPedido(struct Pedido pedido) {
-//     printf("\n--- Detalhes do Pedido ---\n");
-//     printf("Cliente: %s\n", pedido.nomeCliente);
-//     printf("\nPizzas do Pedido:\n");
-//     for (int i = 0; i < pedido.quantidadePizzas; i++) {
-//         printf("Pizza %d: %s (Tamanho: %c) - R$%.2f\n", i + 1, pedido.pizzas[i].nome, pedido.pizzas[i].tamanho, pedido.pizzas[i].preco);
-//     }
-//     printf("\nTotal do Pedido: R$%.2f\n", pedido.total);
-// }
+// Função para registrar um pedido
+void registrarPedido(ListaPedido * array, int cod, char nomeCliente[], ListaPizza pizzas, int quantidadePizzas, float total) {
+
+    Pedido novo_pedido = construtor_pedido(cod, nomeCliente, pizzas, quantidadePizzas, total);
+
+    if( array->array == NULL){
+        array->capacidade = 2;
+        array->array = (Pedido*)malloc(array->capacidade*sizeof(Pedido));
+    }
+
+    if(array->tamanho == array->capacidade){
+        array->capacidade *=2;
+        array->array = (Pedido*)realloc(array->array, array->capacidade*sizeof(Pedido));
+    }
+
+    array->array[array->tamanho++] = novo_pedido;
+}
 
 #endif
