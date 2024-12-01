@@ -1,70 +1,89 @@
-#include "tipo.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> 
 
-#ifndef sabor
-#define sabor
+#ifndef SABOR_H
+#define SABOR_H
 
 typedef struct Sabor {
     int cod;
     char nome[50];
-    int tipo;  //tipo de sabor: tradicional, especial, nobre
-
+    char tipo[50]; // Tipo do sabor: tradicional, especial, nobre
+    float preco; 
 } Sabor;
 
-Sabor construtor_sabor(int cod, char nome[], int tipo){
+// Construtor de Sabor
+Sabor construtor_sabor(int cod, const char nome[], const char tipo[], float preco) {
     Sabor novo;
 
     novo.cod = cod;
-    strcpy(novo.nome, nome); //Quando se quiser copiar o conteúdo de uma string para outro se deve utilizar a função strcpy
-    novo.tipo = tipo; 
+    strcpy(novo.nome, nome);
+    strcpy(novo.tipo, tipo);
+    novo.preco = preco;
 
     return novo;
 }
 
+// Estrutura para representar a lista de sabores
 typedef struct ListaSabores {
-    Sabor * array;
-    int tamanho;
-    int capacidade;
-
+    Sabor *array;
+    int tamanho;   
+    int capacidade; 
 } ListaSabores;
 
-ListaSabores *construtor_lista_sabores(){
 
-    ListaSabores * novo = (ListaSabores*)malloc(sizeof(ListaSabores));
-    novo->tamanho = 0;
-    novo->capacidade = 0;
-    novo->array = NULL;
-
-    return novo;
-}
-
-void add_sabor(ListaSabores * array, int cod, char nome[], int tipo){
-    Sabor novo_sabor = construtor_sabor(cod, nome, tipo);
-
-    if(array->array == NULL){
-        array->capacidade = 2;
-        array->array = (Sabor*)malloc(array->capacidade*sizeof(Sabor));
+ListaSabores *construtor_lista_sabores() {
+    ListaSabores *nova_lista = (ListaSabores *)malloc(sizeof(ListaSabores));
+    if (nova_lista == NULL) {
+        perror("Falha ao alocar memória para ListaSabores");
+        exit(EXIT_FAILURE);
     }
 
-    if(array->tamanho == array->capacidade){
-        array->capacidade *=2;
-        array->array = (Sabor*)realloc(array->array, array->capacidade*sizeof(Sabor));
+    nova_lista->tamanho = 0;
+    nova_lista->capacidade = 2;
+    nova_lista->array = (Sabor *)malloc(nova_lista->capacidade * sizeof(Sabor));
+
+    if (nova_lista->array == NULL) {
+        perror("Falha ao alocar memória para o array de sabores");
+        free(nova_lista);
+        exit(EXIT_FAILURE);
     }
 
-    array->array[array->tamanho++] = novo_sabor;
+    return nova_lista;
 }
 
-Sabor *get_sabor(ListaSabores *array, int index) {
-    if (index >= array->tamanho || index < 0) {
-        return NULL; // Verifica se o índice está fora do intervalo
+void add_sabor(ListaSabores *lista, int cod, const char nome[], const char tipo[], float preco) {
+    if (lista == NULL) return;
+
+    // Expande a capacidade do array se necessário
+    if (lista->tamanho == lista->capacidade) {
+        lista->capacidade *= 2;
+        Sabor *novo_array = (Sabor *)realloc(lista->array, lista->capacidade * sizeof(Sabor));
+        if (novo_array == NULL) {
+            perror("Falha ao redimensionar array de sabores");
+            liberar_lista_sabores(lista);
+            exit(EXIT_FAILURE);
+        }
+        lista->array = novo_array;
     }
-    return &array->array[index]; // Retorna o ponteiro para o sabor no índice fornecido
+
+    // Cria e adiciona o novo sabor
+    lista->array[lista->tamanho++] = construtor_sabor(cod, nome, tipo, preco);
+}
+
+// Retorna um ponteiro para o sabor no índice especificado
+Sabor *get_sabor(const ListaSabores *lista, int index) {
+    if (lista == NULL || index < 0 || index >= lista->tamanho) {
+        return NULL;
+    }
+    return &lista->array[index];
 }
 
 
-void liberar_lista_sabores(ListaSabores *array) {
-    if (array != NULL) {
-        free(array->array);
-        free(array);
+void liberar_lista_sabores(ListaSabores *lista) {
+    if (lista != NULL) {
+        free(lista->array);
+        free(lista);
     }
 }
 

@@ -32,21 +32,7 @@ Pizza construtor_pizza(int id, char nome[], char tamanho[], int id_sabor[3], flo
     //Aqui pensei em pesquisar o id do sabor, depois o tipo do sabor e por fim, o valor daquele tipo
     // afim de adicionar ele ao valor da pizza
 
-    Sabor *sabores = get_sabor(ListaSabores, id_sabor[0])
-    int tipo = sabores->tipo;
-
-    Tipo *tipoSabor = get_tipo(ListaTipo, tipo);
-
-    float valorTipo = tipoSabor->valor;
-
-    if(tamanho == "P" || tamanho == "p"){
-        novaPizza.valor = valor + (valor * 0.10);
-    } else if (tamanho == "M" || tamanho == "m"){
-        novaPizza.valor = valor + (valor * 0.18);
-    } else{
-        novaPizza.valor = valor + (valor * 0.25);
-    }
-
+    novaPizza.valor = valor + (valor * 0.25);
     strcpy(novaPizza.tamanho, tamanho);
     strcpy(novaPizza.id_sabor, id_sabor);
 
