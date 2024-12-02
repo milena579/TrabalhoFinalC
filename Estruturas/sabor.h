@@ -12,7 +12,7 @@ typedef struct Sabor {
     float preco; 
 } Sabor;
 
-Sabor construtor_sabor(int cod, const char nome[], const char tipo[], float preco) {
+Sabor construtor_sabor(int cod,  char nome[],  char tipo[], float preco) {
     Sabor novo;
 
     novo.cod = cod;
@@ -32,41 +32,51 @@ typedef struct ListaSabores {
 
 ListaSabores *construtor_lista_sabores() {
     ListaSabores *nova_lista = (ListaSabores *)malloc(sizeof(ListaSabores));
-    if (nova_lista == NULL) {
-        perror("Falha ao alocar memória para ListaSabores");
-        exit(EXIT_FAILURE);
-    }
 
     nova_lista->tamanho = 0;
-    nova_lista->capacidade = 2;
-    nova_lista->array = (Sabor *)malloc(nova_lista->capacidade * sizeof(Sabor));
+    nova_lista->capacidade = 0;
+    nova_lista->array = NULL;
 
-    if (nova_lista->array == NULL) {
-        perror("Falha ao alocar memória para o array de sabores");
-        free(nova_lista);
-        exit(EXIT_FAILURE);
-    }
 
     return nova_lista;
 }
 
 void add_sabor(ListaSabores *lista, int cod, const char nome[], const char tipo[], float preco) {
-    if (lista == NULL) return;
+    Sabor novo_sabor =  construtor_sabor(cod, nome, tipo, preco);
+
+    if (lista->array == NULL) {
+        lista->capacidade = 2;
+        lista->array =  (Sabor *)malloc(lista->capacidade * sizeof(Sabor));
+    }
 
     if (lista->tamanho == lista->capacidade) {
         lista->capacidade *= 2;
-        Sabor *novo_array = (Sabor *)realloc(lista->array, lista->capacidade * sizeof(Sabor));
+        Sabor *novo_array = (Sabor *)realloc(lista->array, lista->capacidade*sizeof(Sabor));
         lista->array = novo_array;
     }
 
-    lista->array[lista->tamanho++] = construtor_sabor(cod, nome, tipo, preco);
+    lista->array[lista->tamanho++] = novo_sabor;
 }
 
-Sabor *get_sabor(const ListaSabores *lista, int index) {
+Sabor *get_sabor(ListaSabores *lista, int index) {
+
     if (lista == NULL || index < 0 || index >= lista->tamanho) {
         return NULL;
     }
+
     return &lista->array[index];
+}
+
+
+Sabor *get_sabor_id(ListaSabores *lista, int id) {
+
+    for(int i = 0; i < lista->tamanho; i++){
+        if(id == lista->array[i].cod){
+            return &lista->array[i];
+        }
+    }
+    
+    return NULL;
 }
 
 void liberar_lista_sabores(ListaSabores *lista) {

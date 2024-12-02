@@ -31,13 +31,12 @@ int menu_pizza(int user){
 }
 
 // Função que adiciona uma nova pizza no array de pizzas
-void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
+void adicionar_pizza(ListaPizza * array, ListaSabores * lista_sabores, int id){
     
-    char nome[50] = "pizza";
     char tamanho[1];
-    int id_sabor[3];
+    int id_sabor[] = {0, 0, 0};
     float valor;
-    float maior_sabor = 0.0f;
+    float maior_sabor = 0;
 
     printf("\n ------------ ADICIONAR PIZZA ----------\n");
 
@@ -45,7 +44,6 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
     fflush(stdin);
     gets(tamanho);
 
-    ListaSabores *lista_sabores = construtor_lista_sabores();
     printf("\n--- Lista de Sabores ---\n");
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
@@ -67,7 +65,8 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
         printf("\nID do Sabor %i: ", i + 1);
         scanf("%i", &id_sabor[i]);
 
-        Sabor *sabor = get_sabor(lista_sabores, id_sabor[i]); 
+        Sabor *sabor = get_sabor_id(lista_sabores, id_sabor[i]); 
+
         if (sabor != NULL && sabor->preco > maior_sabor) {
             maior_sabor = sabor->preco;  
         }
@@ -85,8 +84,8 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
     }
 
     printf("\nValor: %.2f", valor);
-
-    add_pizza(array, id, nome, tamanho, id_sabor, valor);
+    
+    add_pizza(array, id, "Pizza", tamanho, id_sabor, valor);
 }
 
 //mostra uma lista com todas as pizzas cadastradas
@@ -102,7 +101,7 @@ void ver_pizzas(ListaPizza * array){
         printf("\n| %s |", pizzas->nome);
         printf("\n| %s |", pizzas->tamanho);
         printf("\n| %i, %i, %i |", pizzas->id_sabor[0], pizzas->id_sabor[1], pizzas->id_sabor[2]);
-        printf("\n| %f |", pizzas->valor);
+        printf("\n| %.2f |", pizzas->valor);
     }
 }
 

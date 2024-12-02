@@ -11,14 +11,14 @@ int main() {
 
     ListaSabores *lista_sabores = construtor_lista_sabores();
 
-    add_sabor(lista_sabores, 101, "Mussarela", "Clássica", 29.90); 
-    add_sabor(lista_sabores, 102, "Calabresa", "Clássica", 29.90); 
+    add_sabor(lista_sabores, 101, "Mussarela", "Classica", 29.90); 
+    add_sabor(lista_sabores, 102, "Calabresa", "Classica", 29.90); 
     add_sabor(lista_sabores, 103, "Frango com Catupiry", "Especial", 34.90); 
 
     printf("\n--- Lista de Sabores ---\n");
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-        printf("Código: %d, Nome: %s, Tipo: %s, Preço: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
+        printf("Ccdigo: %d, Nome: %s, Tipo: %s, Preco: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
     }
 
     // ListaPizza *lista_pizzas = construtor_lista_pizza();

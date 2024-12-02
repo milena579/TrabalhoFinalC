@@ -74,4 +74,12 @@ Pizza * get_pizza(ListaPizza * array, int index) {
     return &array->array[index];
 }
 
+void liberar_lista_pizzas(ListaPizza *lista) {
+    if (lista != NULL) {
+        free(lista->array);
+        free(lista);
+    }
+}
+
+
 #endif
