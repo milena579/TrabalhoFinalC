@@ -27,21 +27,19 @@ int menu_pizza(int user){
 
         return op;
     }
+    return 0;
 }
 
 // Função que adiciona uma nova pizza no array de pizzas
-void adicionar_pizza(ListaPizza * array, int id){
+void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
     
-    char nome[50];
+    char nome[50] = "pizza";
     char tamanho[1];
-    int id_sabor;
+    int id_sabor[3];
     float valor;
     float maior_sabor = 0.0f;
 
     printf("\n ------------ ADICIONAR PIZZA ----------\n");
-    printf("\nO pedido esta no nome de quem?: ");
-    fflush(stdin);
-    gets(nome);
 
     printf("\nTamanho (P, M, G): ");
     fflush(stdin);
@@ -52,7 +50,7 @@ void adicionar_pizza(ListaPizza * array, int id){
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-        printf("Código: %d, Nome: %s, Tipo: %i \n, Preço: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
+        printf("Código: %d, Nome: %s, Tipo: %s \n, Preço: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
     }
 
     //pensando em facilitar, pensei em deixar que a pizza P tem um sabor apenas, a M 2 e G 3
@@ -67,9 +65,9 @@ void adicionar_pizza(ListaPizza * array, int id){
 
    for (int i = 0; i < qtdSabores; i++) {
         printf("\nID do Sabor %i: ", i + 1);
-        scanf("%d", &id_sabor);
+        scanf("%i", &id_sabor[i]);
 
-        Sabor *sabor = get_sabor(lista_sabores, id_sabor - 1); 
+        Sabor *sabor = get_sabor(lista_sabores, id_sabor[i]); 
         if (sabor != NULL && sabor->preco > maior_sabor) {
             maior_sabor = sabor->preco;  
         }
@@ -103,7 +101,7 @@ void ver_pizzas(ListaPizza * array){
         printf("\n| %i |", pizzas->id);
         printf("\n| %s |", pizzas->nome);
         printf("\n| %s |", pizzas->tamanho);
-        printf("\n| %s |", pizzas->id_sabor);
+        printf("\n| %i, %i, %i |", pizzas->id_sabor[0], pizzas->id_sabor[1], pizzas->id_sabor[2]);
         printf("\n| %f |", pizzas->valor);
     }
 }
