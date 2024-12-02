@@ -21,10 +21,10 @@ int main() {
         printf("Código: %d, Nome: %s, Tipo: %s, Preço: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
     }
 
-    ListaPizza *lista_pizzas = construtor_lista_pizza();
+    // ListaPizza *lista_pizzas = construtor_lista_pizza();
 
     // Adicionando uma pizza de exemplo com 2 sabores para tamanho M
-    int sabores_m[] = {101, 103}; 
+    // int sabores_m[] = {101, 103}; 
     // add_pizza(lista_pizzas, 1, "Mussarela, Frango com Catupiry", "M", sabores_m, 0);  
 
     // Exibindo as pizzas cadastradas
@@ -35,7 +35,7 @@ int main() {
 
 
     liberar_lista_sabores(lista_sabores);
-    liberar_lista_pizzas(lista_pizzas);
+    // liberar_lista_pizzas(lista_pizzas);
 
     return 0;
 }

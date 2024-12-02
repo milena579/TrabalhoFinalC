@@ -16,21 +16,21 @@ typedef struct Pedido {
 
 } Pedido;
 
-Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza pizzas, int quantidadePizzas, float total)
+Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza *pizzas, int quantidadePizzas, float total)
 {
     Pedido novoPedido;
 
     novoPedido.cod = cod;
     strcpy(novoPedido.nomeCliente, nomeCliente);
-    novoPedido.pizzas;
-    novoPedido.quantidadePizzas;
-    novoPedido.total;
+    novoPedido.pizzas = pizzas;
+    novoPedido.quantidadePizzas=quantidadePizzas;
+    novoPedido.total=total;
 
     return novoPedido;
 }
 
 // Função para registrar um pedido
-void registrarPedido(int cod, char nomeCliente[], ListaPizza pizzas, int quantidadePizzas, float total) {
+void registrarPedido(int cod, char nomeCliente[], ListaPizza *pizzas, int quantidadePizzas, float total) {
 
     Pedido novo_pedido = construtor_pedido(cod, nomeCliente, pizzas, quantidadePizzas, total);
 

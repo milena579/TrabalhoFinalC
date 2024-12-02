@@ -7,6 +7,16 @@
 #ifndef funcao_pedido
 #define funcao_pedido
 
+//Função para exibir o pedido
+void exibirPedido(Pedido pedido) {
+    printf("\n ------------ PEDIDO ----------\n");
+    printf("\nCliente: %s", pedido.nomeCliente);
+    ver_pizzas(pedido.pizzas);
+    printf("\nQuantidade: %i", pedido.quantidadePizzas);
+    printf("\n\nValor total: %i", pedido.total);
+    printf("\nCOD: %i", pedido.cod);
+}
+
 int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_sabores) {
     
     int op = 3;
@@ -29,11 +39,13 @@ int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_s
                 break;
 
             case 1:
-                adicionar_pizza(lista_pizzas, lista_sabores, lista_pizzas->tamanho-1);
+                adicionar_pizza(pedido.pizzas, lista_sabores, pedido.pizzas->tamanho-1);
+                break;
 
             case 2:
                 printf("Pedido finalizado!");
                 exibirPedido(pedido);
+                break;
         }
 
         if(op < 0 || op > 3){
@@ -63,21 +75,14 @@ void novoPedido(ListaSabores * lista_sabores) {
     printf("\nDigite o seu nome: ");
     scanf("%s", &nomeCliente);
 
-    Pedido pedido = construtor_pedido(1, nomeCliente, *lista_pizzas, lista_pizzas->tamanho, total);
+    Pedido pedido = construtor_pedido(1, nomeCliente, lista_pizzas, lista_pizzas->tamanho, total);
 
-    menu_pedido(pedido, lista_pizzas, lista_sabores);
+    int op = 1;
 
-    
-}
-
-//Função para exibir o pedido
-void exibirPedido(Pedido pedido) {
-    printf("\n ------------ PEDIDO ----------\n");
-    printf("\nCliente: %s", pedido.nomeCliente);
-    ver_pizzas(pedido.pizzas);
-    printf("\nQuantidade: %i", pedido.quantidadePizzas);
-    printf("\n\nValor total: %i", pedido.total);
-    printf("\nCOD: %i", pedido.cod);
+    while (op == 1)
+    {
+       op = menu_pedido(pedido,lista_pizzas->array, lista_sabores);
+    }
 }
 
 #endif
