@@ -1,39 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "Estruturas/sabor.h"
 #include "Estruturas/pedido.h"
+#include "Funcoes/pizza_funcao.h"  // Certifique-se de incluir a função de adicionar pizza
+#include "Funcoes/pedido_funcao.h"  
 
 int main() {
-    // Criação das listas de tipos e sabores
+
     ListaSabores *lista_sabores = construtor_lista_sabores();
 
+    add_sabor(lista_sabores, 101, "Mussarela", "Clássica", 29.90); 
+    add_sabor(lista_sabores, 102, "Calabresa", "Clássica", 29.90); 
+    add_sabor(lista_sabores, 103, "Frango com Catupiry", "Especial", 34.90); 
 
-    // Adicionando sabores à lista
-    add_sabor(lista_sabores, 101, "Mussarela", 1); 
-    add_sabor(lista_sabores, 102, "Calabresa", 1); 
-    add_sabor(lista_sabores, 103, "Frango com Catupiry", 2); 
-
-    
-    // Listando os sabores disponíveis
     printf("\n--- Lista de Sabores ---\n");
-    
     for (int i = 0; i < lista_sabores->tamanho; i++) {
-
         Sabor *sabores = get_sabor(lista_sabores, i);
-
-        printf("Código: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);
-        
+        printf("Código: %d, Nome: %s, Tipo: %s, Preço: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
     }
 
-    // ListaPizza *lista_pizzas = construtor_lista_pizza();
-    // add_pizza(lista_pizzas, lista_sabores, lista_tipos, 1, "Mussarela, FrangoCatupiry", "M", 2, 0);
+    ListaPizza *lista_pizzas = construtor_lista_pizza();
+
+    // Adicionando uma pizza de exemplo com 2 sabores para tamanho M
+    int sabores_m[] = {101, 103}; 
+    // add_pizza(lista_pizzas, 1, "Mussarela, Frango com Catupiry", "M", sabores_m, 0);  
+
+    // Exibindo as pizzas cadastradas
+    printf("\n--- Lista de Pizzas ---\n");
+    // ver_pizzas(lista_pizzas);
+
+    novoPedido(lista_sabores);
 
 
-    Pedido * newPedido;
-    registrarPedido(lista_sabores, lista_tipos);
-
-    // Liberar memória
-    liberar_lista_tipos(lista_tipos);
     liberar_lista_sabores(lista_sabores);
+    liberar_lista_pizzas(lista_pizzas);
+
+    return 0;
 }

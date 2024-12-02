@@ -21,37 +21,15 @@ typedef struct ListaPizza {
 } ListaPizza;
 
 //função que será chamada na main para declarar uma pizza
-<<<<<<< HEAD
-Pizza construtor_pizza(ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3], float valor)
-=======
 Pizza construtor_pizza(int id, char nome[], char tamanho[], char id_sabor[], float valor)
->>>>>>> origin/milena
 {
     Pizza novaPizza;
 
     novaPizza.id = id;
     strcpy(novaPizza.nome, nome); //Quando se quiser copiar o conteúdo de uma string para outro se deve utilizar a função strcpy
-<<<<<<< HEAD
-    
-    //Aqui pensei em pesquisar o id do sabor, depois o tipo do sabor e por fim, o valor daquele tipo
-    // afim de adicionar ele ao valor da pizza
-
-    Sabor * findSabor = get_sabor(lista_sabores, id_sabor[0]);
-    Tipo * findTipo = get_tipo(lista_tipos, findSabor->tipo);
-    float valorTipo = findTipo->valor;
-
-    if(tamanho == "P" || tamanho == "p"){
-        novaPizza.valor = valor + (valor * 0.10);
-    } else if (tamanho == "M" || tamanho == "m"){
-        novaPizza.valor = valor + (valor * 0.18);
-    } else{
-        novaPizza.valor = valor + (valor * 0.25);
-    }
-
-=======
->>>>>>> origin/milena
     strcpy(novaPizza.tamanho, tamanho);
     strcpy(novaPizza.id_sabor, id_sabor);
+
     novaPizza.valor = valor;
 
     return novaPizza;
@@ -66,15 +44,9 @@ ListaPizza * construtor_lista_pizza() {
     return novo;
 }
 
-<<<<<<< HEAD
-void add_pizza(ListaPizza * array, ListaSabores * lista_sabores, ListaTipo * lista_tipos, int id, char nome[], char tamanho[], int id_sabor[3],  float valor){
-
-    Pizza nova_pizza = construtor_pizza(lista_sabores, lista_tipos, id, nome, tamanho, id_sabor[3], valor);
-=======
 void add_pizza(ListaPizza * array, int id, char nome[], char tamanho[], char id_sabor[], float valor){
 
     Pizza nova_pizza = construtor_pizza(id, nome, tamanho, id_sabor,valor);
->>>>>>> origin/milena
 
     if( array->array == NULL){
         array->capacidade = 2;

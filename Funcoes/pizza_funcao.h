@@ -27,16 +27,16 @@ int menu_pizza(int user){
 
         return op;
     }
-
 }
 
 // Função que adiciona uma nova pizza no array de pizzas
-void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, ListaTipo * tipo, int id){
+void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, int id){
     
     char nome[50] = "pizza";
     char tamanho[1];
-    int id_sabor[3];
-    float valor = 0;
+    int id_sabor;
+    float valor;
+    float maior_sabor = 0.0f;
 
     printf("\n ------------ ADICIONAR PIZZA ----------\n");
 
@@ -49,41 +49,43 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * sabores, ListaTipo * tip
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-<<<<<<< HEAD
-        printf("Codigo: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);   
-=======
         printf("Código: %d, Nome: %s, Tipo: %i \n, Preço: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
->>>>>>> origin/milena
     }
 
     //pensando em facilitar, pensei em deixar que a pizza P tem um sabor apenas, a M 2 e G 3
-    
     int qtdSabores = 1;
 
-    if(tamanho == "M" || tamanho == "g"){
+    if (strcmp(tamanho, "M") == 0 || strcmp(tamanho, "m") == 0) {
         qtdSabores = 2;
     }
-    if(tamanho == "G" || tamanho == "g"){
+    if (strcmp(tamanho, "G") == 0 || strcmp(tamanho, "g") == 0) {
         qtdSabores = 3;
     }
 
-    for(int i = 0; i < qtdSabores; i++){
-        printf("\nID do Sabor %i: ", i+1);
-        scanf("%i", &id_sabor[i]);
+   for (int i = 0; i < qtdSabores; i++) {
+        printf("\nID do Sabor %i: ", i + 1);
+        scanf("%d", &id_sabor);
 
-        // vai repetir a pergunta até obter um valor correto
-        while(id_sabor < 101 || id_sabor > 103) {
-            printf("\nValor invalido! ID do Sabor:");
-            scanf("%i", &id_sabor[i]);
+        Sabor *sabor = get_sabor(lista_sabores, id_sabor - 1); 
+        if (sabor != NULL && sabor->preco > maior_sabor) {
+            maior_sabor = sabor->preco;  
         }
-
     }
 
-    printf("\nValor: ");
-    scanf("%f", &valor);
+    valor = maior_sabor;
 
-    add_pizza(array, sabores, tipo, id, nome, tamanho, id_sabor, valor);
+    // Se o tamanho for M, adiciona 10%
+    if (strcmp(tamanho, "M") == 0 || strcmp(tamanho, "m") == 0) {
+        valor *= 1.10;  // Adiciona 10%
+    }
+    // Se o tamanho for G, adiciona 20%
+    else if (strcmp(tamanho, "G") == 0 || strcmp(tamanho, "g") == 0) {
+        valor *= 1.20;  
+    }
 
+    printf("\nValor: %.2f", valor);
+
+    add_pizza(array, id, nome, tamanho, id_sabor, valor);
 }
 
 //mostra uma lista com todas as pizzas cadastradas
@@ -93,7 +95,7 @@ void ver_pizzas(ListaPizza * array){
 
     for(int i = 0; i < array->tamanho; i ++){
 
-        Pizza * pizzas = get_pizza(array, i);
+        Pizza *pizzas = get_pizza(array, i);
         
         printf("\n| %i |", pizzas->id);
         printf("\n| %s |", pizzas->nome);
