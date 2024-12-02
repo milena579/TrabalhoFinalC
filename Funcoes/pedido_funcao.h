@@ -9,12 +9,28 @@
 
 //Função para exibir o pedido
 void exibirPedido(Pedido pedido) {
+
+    for(int i = 0; i < pedido.pizzas->tamanho; i++) {
+
+        Pizza *pizzas = get_pizza(pedido.pizzas, i);
+
+        pedido.total = pizzas->valor + pedido.total;
+    }
+
+    pedido.quantidadePizzas = pedido.pizzas->tamanho;
+
     printf("\n ------------ PEDIDO ----------\n");
+
     printf("\nCliente: %s", pedido.nomeCliente);
+
     ver_pizzas(pedido.pizzas);
+
     printf("\nQuantidade: %i", pedido.quantidadePizzas);
-    printf("\n\nValor total: %i", pedido.total);
+
+    printf("\n\nValor total: %.2f", pedido.total);
+
     printf("\nCOD: %i", pedido.cod);
+
 }
 
 int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_sabores) {
@@ -39,7 +55,7 @@ int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_s
                 break;
 
             case 1:
-                adicionar_pizza(pedido.pizzas, lista_sabores, pedido.pizzas->tamanho-1);
+                adicionar_pizza(pedido.pizzas, lista_sabores, pedido.pizzas->tamanho+1);
                 break;
 
             case 2:
@@ -66,10 +82,6 @@ void novoPedido(ListaSabores * lista_sabores) {
 
     ListaPizza * lista_pizzas = construtor_lista_pizza();
 
-    for(int i = 0; i < lista_pizzas->tamanho; i++) {
-        Pizza *pizzas = get_pizza(lista_pizzas, i);
-        total = pizzas->valor + total;
-    }
 
     printf("\n ------------ REGISTRAR PEDIDO ----------\n");
     printf("\nDigite o seu nome: ");
@@ -81,7 +93,7 @@ void novoPedido(ListaSabores * lista_sabores) {
 
     while (op == 1)
     {
-       op = menu_pedido(pedido,lista_pizzas->array, lista_sabores);
+       op = menu_pedido(pedido, lista_pizzas->array, lista_sabores);
     }
 }
 
