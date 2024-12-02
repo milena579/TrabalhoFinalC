@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/ingri/Desktop/TrabalhoFinalC",
-      "program": "c:/Users/ingri/Desktop/TrabalhoFinalC/build/Debug/outDebug",
+      "cwd": "c:/TrabalhoFinalC",
+      "program": "c:/TrabalhoFinalC/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
