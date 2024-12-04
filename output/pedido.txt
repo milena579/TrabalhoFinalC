@@ -1,3 +1,4 @@
 COD: 1
-Cliente: mil
-Preço Total: R$ 0.00
+Cliente: ingrid
+
+| ID: 1  | Pizza ( p ) | Calabresa,Preço Total: R$ 0.00
