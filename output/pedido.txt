@@ -1,8 +1,8 @@
 COD: 1
 Cliente: Ingrid
 
-| ID: 1  | Pizza ( g ) | Calabresa, Frango com Catupiry, Mussarela,
+| ID: 1  | Pizza ( p ) | Calabresa,
 | ID: 2  | Pizza ( m ) | Calabresa, Frango com Catupiry,
-| ID: 3  | Pizza ( p ) | Calabresa,
+| ID: 3  | Pizza ( g ) | Mussarela, Frango com Catupiry, Mussarela,
 
 Preço Total: R$ 110.17
