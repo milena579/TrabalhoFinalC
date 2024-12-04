@@ -102,7 +102,7 @@ void ver_pizzas(ListaPizza * array, ListaSabores * sabores){
         for (int i = 0; i < 3; i++)
         {
             if(pizzas->id_sabor[i] != NULL) {
-                Sabor * sabor = get_sabor(sabores, pizzas->id_sabor[i]);
+                Sabor * sabor = get_sabor_id(sabores, pizzas->id_sabor[i]);
                 printf(" %s,", sabor->nome);
             }
         }

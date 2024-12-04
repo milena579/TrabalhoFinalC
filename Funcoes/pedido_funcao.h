@@ -13,25 +13,18 @@ void exibirPedido(Pedido pedido, ListaSabores * sabores) {
     for(int i = 0; i < pedido.pizzas->tamanho; i++) {
 
         Pizza *pizzas = get_pizza(pedido.pizzas, i);
-
         pedido.total = pizzas->valor + pedido.total;
     }
 
     pedido.quantidadePizzas = pedido.pizzas->tamanho;
 
-    printf("\n\n----------------- PEDIDO ----------------\n");
-
+    printf("\n\n--------------------- PEDIDO ---------------------\n");
     printf("\nCliente: %s\n", pedido.nomeCliente);
-
     ver_pizzas(pedido.pizzas, sabores);
-
     printf("\n\nQuantidade de pizzas: %i", pedido.quantidadePizzas);
-
     printf("\n\nValor total: %.2f", pedido.total);
-
     printf("\nCOD: %i", pedido.cod);
-
-    printf("\n-----------------------------------------\n");
+    printf("\n----------------------------------------------------\n");
 
 }
 
@@ -42,8 +35,22 @@ void gerar_comprovante(Pedido pedido, ListaSabores * sabores) {
     fprintf(arquivo_pedido, "COD: %d\n", pedido.cod);
     fprintf(arquivo_pedido, "Cliente: %s\n", pedido.nomeCliente);
 
-    for (int i = 0; i < pedido.quantidadePizzas; i++) {
-        fprintf(arquivo_pedido, "%i | Pizza ( %s )\n | Sabor: %s", i + 1, pedido.pizzas->array->tamanho[i], get_sabor(sabores, pedido.pizzas->array->id_sabor[i])->nome);
+    for(int i = 0; i < pedido.pizzas->tamanho; i++){
+
+        Pizza *pizzas = get_pizza(pedido.pizzas, i);
+
+        fprintf(arquivo_pedido, "\n| ID: %i ", pizzas->id);
+        fprintf(arquivo_pedido, " | %s ( %s ) |", pizzas->nome, pizzas->tamanho);
+        
+        for (int i = 0; i < 3; i++)
+        {
+            if(pizzas->id_sabor[i]) {
+                Sabor * sabor = get_sabor_id(sabores, pizzas->id_sabor[i]);
+                fprintf(arquivo_pedido, " %s,", sabor->nome);
+            }
+        }
+        
+        // fprintf(" | %.2f |", pizzas->valor);
     }
 
     fprintf(arquivo_pedido, "Preço Total: R$ %.2f\n", pedido.total);
@@ -78,8 +85,8 @@ int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_s
 
             case 2:
                 printf("\nPedido finalizado!");
-                gerar_comprovante(pedido, lista_sabores);
                 exibirPedido(pedido, lista_sabores);
+                gerar_comprovante(pedido, lista_sabores);
                 break;
         }
 
