@@ -1,44 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "Estruturas/sabor.h"
-#include "Estruturas/tipo.h"
+#include "Estruturas/pedido.h"
+#include "Funcoes/pizza_funcao.h"  // Certifique-se de incluir a função de adicionar pizza
+#include "Funcoes/pedido_funcao.h"  
 
 int main() {
-    // Criação das listas de tipos e sabores
-    ListaTipo *lista_tipos = construtor_lista_tipo();
+
     ListaSabores *lista_sabores = construtor_lista_sabores();
 
-    // Adicionando tipos à lista
-    add_tipo(lista_tipos, 1, "Tradicional", 10.0);
-    add_tipo(lista_tipos, 2, "Especial", 15.0);
-    add_tipo(lista_tipos, 3, "Nobre", 20.0);
+    add_sabor(lista_sabores, 101, "Mussarela", "Classica", 29.90); 
+    add_sabor(lista_sabores, 102, "Calabresa", "Classica", 29.90); 
+    add_sabor(lista_sabores, 103, "Frango com Catupiry", "Especial", 34.90); 
 
-    // Listando os tipos disponíveis
-    printf("\n--- Lista de Tipos ---\n");
-
-    int i;
-
-    for ( i = 0; i < lista_tipos->tamanho; i++) {
-        Tipo *tipo = get_tipo(lista_tipos, i);
-        printf("ID: %d, Nome: %s, Valor: %.2f\n", tipo->id, tipo->nome, tipo->valor);
-    }
-
-    // Adicionando sabores à lista
-    add_sabor(lista_sabores, 101, "Mussarela", 1); 
-    add_sabor(lista_sabores, 102, "Calabresa", 1); 
-    add_sabor(lista_sabores, 103, "Frango com Catupiry", 2); 
-
-    // Listando os sabores disponíveis
     printf("\n--- Lista de Sabores ---\n");
-    
-    for (i = 0; i < lista_sabores->tamanho; i++) {
-
+    for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-        printf("Código: %d, Nome: %s, Tipo: %i \n", sabores->cod, sabores->nome, sabores->tipo);
-        
+        printf("Codigo: %d, Nome: %s, Tipo: %s, Preco: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
     }
-    // Liberar memória
-    liberar_lista_tipos(lista_tipos);
+
+    novoPedido(lista_sabores);
     liberar_lista_sabores(lista_sabores);
+
+    return 0;
 }
