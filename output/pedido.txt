@@ -1,4 +1,7 @@
 COD: 1
-Cliente: ingrid
+Cliente: milena
 
-| ID: 1  | Pizza ( p ) | Calabresa,Preço Total: R$ 0.00
+| ID: 1  | Pizza ( p ) | Calabresa,
+| ID: 2  | Pizza ( m ) | Frango com Catupiry, Calabresa,
+
+Preço Total: R$ 68.29
