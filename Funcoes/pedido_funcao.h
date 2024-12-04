@@ -35,6 +35,12 @@ void gerar_comprovante(Pedido pedido, ListaSabores * sabores) {
     fprintf(arquivo_pedido, "COD: %d\n", pedido.cod);
     fprintf(arquivo_pedido, "Cliente: %s\n", pedido.nomeCliente);
 
+    for(int i = 0; i < pedido.pizzas->tamanho; i++) {
+
+        Pizza *pizzas = get_pizza(pedido.pizzas, i);
+        pedido.total = pizzas->valor + pedido.total;
+    }
+
     for(int i = 0; i < pedido.pizzas->tamanho; i++){
 
         Pizza *pizzas = get_pizza(pedido.pizzas, i);
@@ -53,7 +59,7 @@ void gerar_comprovante(Pedido pedido, ListaSabores * sabores) {
         // fprintf(" | %.2f |", pizzas->valor);
     }
 
-    fprintf(arquivo_pedido, "Preço Total: R$ %.2f\n", pedido.total);
+    fprintf(arquivo_pedido, "\n\nPreço Total: R$ %.2f", pedido.total);
     fclose(arquivo_pedido); 
 }
 
