@@ -8,7 +8,7 @@
 #define funcao_pedido
 
 //Função para exibir o pedido
-void exibirPedido(Pedido pedido) {
+void exibirPedido(Pedido pedido, ListaSabores * sabores) {
 
     for(int i = 0; i < pedido.pizzas->tamanho; i++) {
 
@@ -19,18 +19,35 @@ void exibirPedido(Pedido pedido) {
 
     pedido.quantidadePizzas = pedido.pizzas->tamanho;
 
-    printf("\n ------------ PEDIDO ----------\n");
+    printf("\n\n----------------- PEDIDO ----------------\n");
 
-    printf("\nCliente: %s", pedido.nomeCliente);
+    printf("\nCliente: %s\n", pedido.nomeCliente);
 
-    ver_pizzas(pedido.pizzas);
+    ver_pizzas(pedido.pizzas, sabores);
 
-    printf("\nQuantidade: %i", pedido.quantidadePizzas);
+    printf("\n\nQuantidade de pizzas: %i", pedido.quantidadePizzas);
 
     printf("\n\nValor total: %.2f", pedido.total);
 
     printf("\nCOD: %i", pedido.cod);
 
+    printf("\n-----------------------------------------\n");
+
+}
+
+void gerar_comprovante(Pedido pedido, ListaSabores * sabores) {
+
+    FILE * arquivo_pedido = fopen("pedido.txt", "w"); // Cria o arquivo de pedidos
+
+    fprintf(arquivo_pedido, "COD: %d\n", pedido.cod);
+    fprintf(arquivo_pedido, "Cliente: %s\n", pedido.nomeCliente);
+
+    for (int i = 0; i < pedido.quantidadePizzas; i++) {
+        fprintf(arquivo_pedido, "%i | Pizza ( %s )\n | Sabor: %s", i + 1, pedido.pizzas->array->tamanho[i], get_sabor(sabores, pedido.pizzas->array->id_sabor[i])->nome);
+    }
+
+    fprintf(arquivo_pedido, "Preço Total: R$ %.2f\n", pedido.total);
+    fclose(arquivo_pedido); 
 }
 
 int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_sabores) {
@@ -39,13 +56,14 @@ int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_s
 
     while (op == 3)
     {
-        printf("\n --------------------------------------------");
+        printf("\n\n|------------OPCOES:-------------------------|");
+        printf("\n|--------------------------------------------|");
         printf("\n|------- 0 - Cancelar pedido ----------------|");
         printf("\n|------- 1 - Inserir pizza ------------------|");
         printf("\n|------- 2 - Finalizar pedido ---------------|");
-        printf("\n --------------------------------------------");
+        printf("\n|--------------------------------------------|");
 
-        printf("\nDigite a opcao desejada: ");
+        printf("\n\nDigite a opcao desejada: \n");
         scanf("%i", &op);
 
         switch (op)
@@ -59,8 +77,9 @@ int menu_pedido(Pedido pedido, ListaPizza * lista_pizzas, ListaSabores * lista_s
                 break;
 
             case 2:
-                printf("Pedido finalizado!");
-                exibirPedido(pedido);
+                printf("\nPedido finalizado!");
+                gerar_comprovante(pedido, lista_sabores);
+                exibirPedido(pedido, lista_sabores);
                 break;
         }
 

@@ -18,24 +18,11 @@ int main() {
     printf("\n--- Lista de Sabores ---\n");
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-        printf("Ccdigo: %d, Nome: %s, Tipo: %s, Preco: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
+        printf("Codigo: %d, Nome: %s, Tipo: %s, Preco: %.2f\n", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);
     }
 
-    // ListaPizza *lista_pizzas = construtor_lista_pizza();
-
-    // Adicionando uma pizza de exemplo com 2 sabores para tamanho M
-    // int sabores_m[] = {101, 103}; 
-    // add_pizza(lista_pizzas, 1, "Mussarela, Frango com Catupiry", "M", sabores_m, 0);  
-
-    // Exibindo as pizzas cadastradas
-    printf("\n--- Lista de Pizzas ---\n");
-    // ver_pizzas(lista_pizzas);
-
     novoPedido(lista_sabores);
-
-
     liberar_lista_sabores(lista_sabores);
-    // liberar_lista_pizzas(lista_pizzas);
 
     return 0;
 }

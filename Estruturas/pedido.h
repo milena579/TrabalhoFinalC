@@ -29,11 +29,4 @@ Pedido construtor_pedido(int cod, char nomeCliente[], ListaPizza *pizzas, int qu
     return novoPedido;
 }
 
-// Função para registrar um pedido
-void registrarPedido(int cod, char nomeCliente[], ListaPizza *pizzas, int quantidadePizzas, float total) {
-
-    Pedido novo_pedido = construtor_pedido(cod, nomeCliente, pizzas, quantidadePizzas, total);
-
-}
-
 #endif

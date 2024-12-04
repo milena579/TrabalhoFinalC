@@ -33,22 +33,21 @@ int menu_pizza(int user){
 // Função que adiciona uma nova pizza no array de pizzas
 void adicionar_pizza(ListaPizza * array, ListaSabores * lista_sabores, int id){
     
-    char tamanho[1];
-    int id_sabor[] = {0, 0, 0};
+    char tamanho[5];
+    int id_sabor[3] = {0, 0, 0};
     float valor;
     float maior_sabor = 0;
 
     printf("\n ------------ ADICIONAR PIZZA ----------\n");
 
     printf("\nTamanho (P, M, G): ");
-    fflush(stdin);
-    gets(tamanho);
+    scanf("%s", &tamanho);
 
     printf("\n--- Lista de Sabores ---\n");
     
     for (int i = 0; i < lista_sabores->tamanho; i++) {
         Sabor *sabores = get_sabor(lista_sabores, i);
-        printf("Código: %d, Nome: %s, Tipo: %s \n, Preço: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
+        printf("\nCodigo: %d | Nome: %s | Tipo: %s | Preco: %f", sabores->cod, sabores->nome, sabores->tipo, sabores->preco);   
     }
 
     //pensando em facilitar, pensei em deixar que a pizza P tem um sabor apenas, a M 2 e G 3
@@ -62,7 +61,7 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * lista_sabores, int id){
     }
 
    for (int i = 0; i < qtdSabores; i++) {
-        printf("\nID do Sabor %i: ", i + 1);
+        printf("\n\nID do Sabor %i: ", i + 1);
         scanf("%i", &id_sabor[i]);
 
         Sabor *sabor = get_sabor_id(lista_sabores, id_sabor[i]); 
@@ -89,19 +88,26 @@ void adicionar_pizza(ListaPizza * array, ListaSabores * lista_sabores, int id){
 }
 
 //mostra uma lista com todas as pizzas cadastradas
-void ver_pizzas(ListaPizza * array){
+void ver_pizzas(ListaPizza * array, ListaSabores * sabores){
 
-    printf("\n-------- LISTA DE PIZZAS ---------\n");
+    printf("\nLISTA DE PIZZAS:");
 
     for(int i = 0; i < array->tamanho; i ++){
 
         Pizza *pizzas = get_pizza(array, i);
+
+        printf("\n| ID: %i ", pizzas->id);
+        printf(" | %s ( %s ) |", pizzas->nome, pizzas->tamanho);
         
-        printf("\n| %i |", pizzas->id);
-        printf("\n| %s |", pizzas->nome);
-        printf("\n| %s |", pizzas->tamanho);
-        printf("\n| %i, %i, %i |", pizzas->id_sabor[0], pizzas->id_sabor[1], pizzas->id_sabor[2]);
-        printf("\n| %.2f |", pizzas->valor);
+        for (int i = 0; i < 3; i++)
+        {
+            if(pizzas->id_sabor[i] != NULL) {
+                Sabor * sabor = get_sabor(sabores, pizzas->id_sabor[i]);
+                printf(" %s,", sabor->nome);
+            }
+        }
+        
+        printf(" | %.2f |", pizzas->valor);
     }
 }
 
